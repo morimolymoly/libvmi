@@ -437,7 +437,7 @@ xen_init_vmi(
     status_t ret = VMI_FAILURE;
     xen_instance_t *xen = xen_get_instance(vmi);
     int rc;
-
+    errprint("[MOLY] XEN VMI INIT!!\n");
     /* setup the info struct */
     rc = xen->libxcw.xc_domain_getinfo(xen->xchandle,
                                        xen->domainid,
@@ -492,7 +492,9 @@ xen_init_vmi(
     if ( VMI_FAILURE == ret )
         goto _bail;
 
+    errprint("[MOLY] BEFORE XEN INIT EVENT!!\n");
     if (vmi->vm_type == HVM && (vmi->init_flags & VMI_INIT_EVENTS)) {
+        errprint("[MOLY] XEN INIT EVENT!!\n");
         ret = xen_init_events(vmi, init_flags, init_data);
 
         if ( VMI_FAILURE == ret )
